@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- Other style sheets -->
+    <link href="normalize.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: white !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            font-size: 1rem !important;
+            font-weight: 400 !important;
+            line-height: 1.5 !important;
+            color: #212529 !important;
+        }
+
+        label {
+            display: inline !important;
+            font-weight: normal !important;
+        }
+    </style>
+    <title>3DT Catalog Code Generator</title>
+</head>
+
+<body>
+    <div
+        style="display: flex; flex-direction: row; -webkit-justify-content: flex-start; -ms-flex-pack: flex-start; justify-content: flex-start;">
+        <div style="width: 55%; word-wrap: break-word; padding: 10px;">
+            <!------------------------------ Documentation Notes and Information About Updating Catalog ------------------------------>
+            <p style="margin-bottom: 4px"><b>! Important: </b> This page needs to be opened as a "Live Server" in Visual
+                Studio Code.</p>
+            <p style="margin-bottom: 4px; margin-top: 4px;"><small><i>Download Live Server from VS Code Extensions
+                        library. Right click on the .html file and "Open with Live Server"<br>To stop a live server
+                        (Ctrl + Shift + P -> Live Server: Stop Live Server)</i></small></p>
+            <hr>
+            <b>How to update catalog data:</b>
+            <ol>
+                <li>Go to <a href="https://merck.autodeskplm360.net/reportListAction.do">PLM Reports</a> in Advanced
+                    Tools on top left of PLM.</li>
+                <li>After the page loads, save the page HTML in the folder with this file using "Save As" (right click
+                    -> Save As, OR Ctrl + S).</li>
+                <li>The saved file should be named "CatalogData.html" and folder "CatalogData_files".</li>
+                <li>Once set, select your data filters and hit "Generate Code" (box on this page).</li>
+                <li>After download button shows up, download the file "catalog.html" and move it into the "Catalog
+                    Contents" folder.</li>
+                <li>Move the "CatalogData_files" folder into the "Catalog Contents" folder</li>
+                <li>All done! Make sure you have catalog.html, normalize.css, style.css, and the CatalogData_files
+                    folder in the same folder if moved.</li>
+            </ol>
+            <p>For more instructions and with graphics, please refer to <a href="documentation.pdf">the PDF documentation</a>.</p>
+            
+        </div>
+        <!------------------------------ Checkboxes ------------------------------>
+        <div id="filter"
+            style="text-align: center; margin: 20px; width: 40%; border: 1px black solid; height: min-content;">
+            <h3 style="margin-bottom: 2px;">Data Filters:</h3>
+            <p style="margin-bottom: 4px;"><small><i>remove data if missing these</i></small></p>
+            <label for="s1"> <input type="checkbox" name="subject" value="Description" id="s1">Description </label>
+            <label for="s2"><input type="checkbox" name="subject" value="Image" id="s2">Image </label>
+            <label for="s3"><input type="checkbox" name="subject" value="Link" id="s3">Link </label>
+            <label for="s4"><input type="checkbox" name="subject" value="Grade" id="s4">Grade </label>
+            <p>
+                <button id="bt" onclick="loadHTML()">Generate Code</button>
+            </p>
+            <div id="notice"></div>
+            <div id="dataRows"></div>
+            <div id="makeDownload"></div>
+        </div>
+    </div>
+
+    <div id="writeInside" style="display:none;"></div>
+    <div id="imported" style="display:none;"></div>
+    <!----------------------------------------------------------------------------->
+
+    <script src="update.js">
+    </script>
+</body>
